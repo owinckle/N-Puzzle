@@ -1,11 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"os/exec"
-	"time"
-)
-
 func addNeighbours(n *node, endState [][]int, size int, input int) {
 	x := n.coord[0]
 	y := n.coord[1]

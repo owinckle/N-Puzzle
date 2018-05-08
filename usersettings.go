@@ -6,9 +6,14 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 )
 
 func getUserInput() ([]int, error) {
+	cmd := "clear"
+	lsCmd := exec.Command("bash", "-c", cmd)
+	lsOut, _ := lsCmd.Output()
+	fmt.Print(string(lsOut))
 	userSettings := make([]int, 2)
 
 	reader := bufio.NewReader(os.Stdin)

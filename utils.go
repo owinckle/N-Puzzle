@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os/exec"
+	"time"
+)
 
 func printBoard(board [][]int) {
 	for row := range board {
@@ -21,9 +25,6 @@ func printSteps(id string) {
 	for i := len(closed) - 1; i > -1; i-- {
 		if idIndex <= len(id) {
 			if closed[i].id == id[:idIndex] {
-				fmt.Println("ID:", closed[i].id)
-				printBoard(closed[i].board)
-				idIndex++
 				if idIndex < len(id)+1 {
 					time.Sleep(time.Millisecond * 200)
 					cmd := "clear"
@@ -31,6 +32,10 @@ func printSteps(id string) {
 					lsOut, _ := lsCmd.Output()
 					fmt.Print(string(lsOut))
 				}
+				fmt.Println("ID:", closed[i].id)
+				printBoard(closed[i].board)
+				idIndex++
+
 			}
 		}
 	}
