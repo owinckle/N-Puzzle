@@ -3,25 +3,10 @@ package main
 import (
 	"bufio"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 )
-
-func printBoard(board [][]int) {
-	for row := range board {
-		for nb := range board[row] {
-			switch board[row][nb] {
-			case 0:
-				fmt.Print("\x1b[31;1m", board[row][nb], "\x1b[0m", "	")
-			default:
-				fmt.Print("\x1b[32;1m", board[row][nb], "\x1b[0m", "	")
-			}
-		}
-		fmt.Println()
-	}
-}
 
 func main() {
 

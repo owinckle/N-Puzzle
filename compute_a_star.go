@@ -83,27 +83,6 @@ func addNeighbours(n *node, endState [][]int, size int, input int) {
 	}
 }
 
-func printSteps(id string) {
-	idIndex := 1
-	for i := len(closed) - 1; i > -1; i-- {
-		if idIndex <= len(id) {
-			if closed[i].id == id[:idIndex] {
-				fmt.Println("ID:", closed[i].id)
-				printBoard(closed[i].board)
-				idIndex++
-				if idIndex < len(id)+1 {
-					time.Sleep(time.Millisecond * 200)
-					cmd := "clear"
-					lsCmd := exec.Command("bash", "-c", cmd)
-					lsOut, _ := lsCmd.Output()
-					fmt.Print(string(lsOut))
-				}
-			}
-		}
-	}
-	fmt.Println("number of moves required : ", idIndex-1)
-}
-
 func computeAStar(input int, board [][]int, endState [][]int, size int) {
 	h := heuristicSwitch(input, board, endState)
 	firstNode := node{
