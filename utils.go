@@ -34,9 +34,9 @@ func findBoard(board [][]int) bool {
 }
 
 func findZero(board [][]int) [2]int {
-	var x int
-	var y int
+	x := 0
 	for i := range board {
+		y := 0
 		for j := range board[i] {
 			if board[i][j] == 0 {
 				return ([2]int{x, y})
