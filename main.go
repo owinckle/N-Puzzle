@@ -9,9 +9,14 @@ import (
 )
 
 func main() {
-
+	showInterface := false
 	if len(os.Args) != 2 {
-		log.Fatal(`Usage: ./puzzle <demo_file>`)
+		if len(os.Args) != 3 {
+			log.Fatal(`Usage: ./puzzle <demo_file> [-i INTERFACE]`)
+		}
+		if len(os.Args) == 3 && os.Args[2] == "-i" {
+			showInterface = true
+		}
 	}
 
 	fileName := os.Args[1]
@@ -41,6 +46,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	computeSwitch(userInput, board, endState, len(board))
+	computeSwitch(userInput, board, endState, len(board), showInterface)
 	return
 }

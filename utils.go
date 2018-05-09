@@ -4,16 +4,28 @@ import (
 	"fmt"
 	"os/exec"
 	"time"
+	"strconv"
 )
+
+func prettyPrint(num int) {
+	whiteSpaces := 5
+	numLen := len(strconv.Itoa(num))
+	for whiteSpaces - numLen > 0 {
+		fmt.Print(" ")
+		whiteSpaces--
+	}
+}
 
 func printBoard(board [][]int) {
 	for row := range board {
 		for nb := range board[row] {
 			switch board[row][nb] {
 			case 0:
-				fmt.Print("\x1b[31;1m", board[row][nb], "\x1b[0m", "		")
+				fmt.Print("\x1b[31;1m", board[row][nb], "\x1b[0m", "")
+				prettyPrint(board[row][nb])
 			default:
-				fmt.Print("\x1b[32;1m", board[row][nb], "\x1b[0m", "		")
+				fmt.Print("\x1b[32;1m", board[row][nb], "\x1b[0m", "")
+				prettyPrint(board[row][nb])
 			}
 		}
 		fmt.Println()

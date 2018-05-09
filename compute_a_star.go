@@ -77,7 +77,7 @@ func addNeighbours(n *node, endState [][]int, size int, input int) {
 	}
 }
 
-func computeAStar(input int, board [][]int, endState [][]int, size int) {
+func computeAStar(input int, board [][]int, endState [][]int, size int, showInterface bool) {
 	h := heuristicSwitch(input, board, endState)
 	firstNode := node{
 		board: copyBoard(board, size),
@@ -93,7 +93,11 @@ func computeAStar(input int, board [][]int, endState [][]int, size int) {
 		closed = append([]*node{open[i]}, closed...)
 		open = append(open[:i], open[i+1:]...)
 		if closed[0].h == 0 {
-			printSteps(closed[0].id)
+			if showInterface == true {
+				printSteps(closed[0].id)
+				return
+			}
+			printBoard(endState)
 			return
 		}
 		addNeighbours(closed[0], endState, size, input)
