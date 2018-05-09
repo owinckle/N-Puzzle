@@ -12,6 +12,8 @@ func heuristicSwitch(input int, board [][]int, endState [][]int) int {
 		return computeHamming(board, endState)
 	case 3:
 		return computeRowColumn(board, endState)
+	case 4:
+		return computeManhattan(board, endState) + computeLinearConflict(board, endState)
 	}
 	return 0
 }

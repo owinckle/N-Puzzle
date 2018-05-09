@@ -36,7 +36,7 @@ func getUserInput() ([]int, error) {
 	}
 
 	reader = bufio.NewReader(os.Stdin)
-	fmt.Print("\nSelect a heuristic:\n1. Manhattan\n2. Hamming\n3. Out of Row/Column\n\n>> ")
+	fmt.Print("\nSelect a heuristic:\n1. Manhattan\n2. Hamming\n3. Out of Row/Column\n4. Manhattan and Linear Conflict\n5. All\n\n>> ")
 
 	text, err = reader.ReadString('\n')
 	if err != nil {
@@ -53,6 +53,9 @@ func getUserInput() ([]int, error) {
 	case "3\n":
 		userSettings[1] = 3
 		fmt.Println("Selected heuristic: Out of Row/Column")
+	case "4\n":
+		userSettings[1] = 4
+		fmt.Println("Selected heuristic: Manhattan and Linear Conflict")
 	default:
 		return nil, errors.New(`getUserInput: unknown heuristic`)
 	}
