@@ -96,6 +96,9 @@ func computeAStar(input int, board [][]int, endState [][]int, size int, showInte
 		i := findNodeIndex()
 		closed = append([]*node{open[i]}, closed...)
 		open = append(open[:i], open[i+1:]...)
+		if len(open) > openMax {
+			openMax = len(open)
+		}
 		if closed[0].h == 0 {
 			if showInterface == true {
 				printSteps(closed[0].id)
@@ -103,6 +106,8 @@ func computeAStar(input int, board [][]int, endState [][]int, size int, showInte
 			}
 			printBoard(endState)
 			fmt.Println("number of moves required : ", closed[0].g + 1)
+			fmt.Println("complexity in size : ", openMax)
+			fmt.Println("complexity in time : ", len(open) + len(closed))
 			return
 		}
 		addNeighbours(closed[0], endState, size, input)

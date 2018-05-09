@@ -13,6 +13,8 @@ type node struct {
 
 var open []*node
 var closed []*node
+var openTotal uint64 = 0
+var openMax uint64 = 0
 
 func findNodeIndex() int {
 	index := -1
