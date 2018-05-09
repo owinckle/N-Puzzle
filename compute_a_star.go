@@ -1,5 +1,9 @@
 package main
 
+import (
+	"fmt"
+)
+
 func addNeighbours(n *node, endState [][]int, size int, input int) {
 	x := n.coord[0]
 	y := n.coord[1]
@@ -98,6 +102,7 @@ func computeAStar(input int, board [][]int, endState [][]int, size int, showInte
 				return
 			}
 			printBoard(endState)
+			fmt.Println("number of moves required : ", closed[0].g + 1)
 			return
 		}
 		addNeighbours(closed[0], endState, size, input)
