@@ -17,8 +17,7 @@ func getUserInput() ([]int, error) {
 	userSettings := make([]int, 3)
 
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print(xd("Select search type:\n1. A* Pathfinding\n2. Greedy Search\n\n>> ", 1))
-
+	fmt.Print(xd("Select search type:\n1. A* Pathfinding\n2. Greedy Search\n3. Uniform Cost\n\n>> ", 1))
 	text, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatal(err)
@@ -31,8 +30,15 @@ func getUserInput() ([]int, error) {
 	case "2\n":
 		userSettings[0] = 2
 		fmt.Println(xd("Selected search type: Greedy Search", 1))
+	case "3\n":
+		userSettings[0] = 3
+		fmt.Println(xd("Selected search type: Uniform Cost", 1))
 	default:
 		return nil, errors.New(`getUserInput: unknown search type`)
+	}
+
+	if userSettings[0] == 3 {
+		return userSettings, nil
 	}
 
 	reader = bufio.NewReader(os.Stdin)

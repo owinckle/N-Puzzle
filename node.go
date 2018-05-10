@@ -7,22 +7,10 @@ package main
 type node struct {
 	board   [][]int
 	id      string
-	f, g, h int
+	g, h, f int
 	coord   [2]int
 }
 
 var open []*node
 var closed []*node
 var openMax int = 0
-
-func findNodeIndex() int {
-	index := -1
-	min := -1
-	for i := range open {
-		if min < 0 || open[i].f < min {
-			min = open[i].f
-			index = i
-		}
-	}
-	return index
-}

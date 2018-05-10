@@ -36,7 +36,7 @@ func findEndTile(nb int, endState [][]int, x int, y int) int {
 	return 0
 }
 
-func indexOf(nb int, endState [][]int) [2]int{
+func indexOf(nb int, endState [][]int) [2]int {
 	for i := range endState {
 		for j := range endState[i] {
 			if endState[i][j] == nb {
@@ -52,7 +52,7 @@ func checkColumn(x int, y int, board [][]int, endState [][]int) int {
 	realPos := indexOf(board[x][y], endState)
 	checkPos := indexOf(board[x][y], endState)
 
-	if realPos[1] < y && x == realPos[0]{
+	if realPos[1] < y && x == realPos[0] {
 		for i := 0; i < y; i++ {
 			checkPos = indexOf(board[x][i], endState)
 			if checkPos[1] >= y && checkPos[0] == x && board[x][i] != 0 {
@@ -61,13 +61,13 @@ func checkColumn(x int, y int, board [][]int, endState [][]int) int {
 		}
 	}
 
-	if realPos[1] > y && x == realPos[0]{
+	if realPos[1] > y && x == realPos[0] {
 		for i := 0; i > y; i-- {
 			checkPos = indexOf(board[i][y], endState)
 			if checkPos[1] <= y && checkPos[0] == x && board[i][y] != 0 {
 				value++
 			}
-		}	
+		}
 	}
 	return value
 }
@@ -77,22 +77,22 @@ func checkRow(x int, y int, board [][]int, endState [][]int) int {
 	realPos := indexOf(board[x][y], endState)
 	checkPos := indexOf(board[x][y], endState)
 
-	if realPos[0] < x && y == realPos[1]{
+	if realPos[0] < x && y == realPos[1] {
 		for i := 0; i < x; i++ {
 			checkPos = indexOf(board[x][i], endState)
 			if checkPos[0] >= x && checkPos[1] == y && board[x][i] != 0 {
 				value++
 			}
-		}	
+		}
 	}
 
-	if realPos[0] > x && y == realPos[1]{
+	if realPos[0] > x && y == realPos[1] {
 		for i := 0; i > x; i-- {
 			checkPos = indexOf(board[i][y], endState)
 			if checkPos[0] <= x && checkPos[1] == y && board[i][y] != 0 {
 				value++
 			}
-		}	
+		}
 	}
 	return value
 }
@@ -142,4 +142,21 @@ func computeRowColumn(board [][]int, endState [][]int) int {
 		}
 	}
 	return value
+}
+
+func heuristicSwitch(input []int, board [][]int, endState [][]int) int {
+	if input[0] == 3 {
+		return 0
+	}
+	switch input[1] {
+	case 1:
+		return computeManhattan(board, endState)
+	case 2:
+		return computeHamming(board, endState)
+	case 3:
+		return computeRowColumn(board, endState)
+	case 4:
+		return computeManhattan(board, endState) + computeLinearConflict(board, endState)
+	}
+	return 0
 }

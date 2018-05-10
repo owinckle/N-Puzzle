@@ -49,6 +49,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	computeSwitch(userInput, board, endState, len(board))
+	computeAStar(userInput, board, endState, len(board))
 	return
 }

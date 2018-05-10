@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"os/exec"
-	"time"
-	"strconv"
 	"bufio"
-	"os"
-	"math/rand"
 	"bytes"
+	"fmt"
+	"math/rand"
+	"os"
+	"os/exec"
+	"strconv"
+	"time"
 )
 
 func xd(s string, n int) string {
@@ -47,13 +47,13 @@ func xd(s string, n int) string {
 func prettyPrint(num int) {
 	whiteSpaces := 5
 	numLen := len(strconv.Itoa(num))
-	for whiteSpaces - numLen > 0 {
+	for whiteSpaces-numLen > 0 {
 		fmt.Print(" ")
 		whiteSpaces--
 	}
 }
 
-func printBoard(board [][]int) {
+func printBoard(board [][]int, endState [][]int) {
 	for row := range board {
 		for nb := range board[row] {
 			switch board[row][nb] {
@@ -61,7 +61,11 @@ func printBoard(board [][]int) {
 				fmt.Print("\x1b[31;1m", board[row][nb], "\x1b[0m", "")
 				prettyPrint(board[row][nb])
 			default:
-				fmt.Print("\x1b[32;1m", board[row][nb], "\x1b[0m", "")
+				if board[row][nb] == endState[row][nb] {
+					fmt.Print("\x1b[32;1m", board[row][nb], "\x1b[0m", "")
+				} else {
+					fmt.Print("\x1b[94;1m", board[row][nb], "\x1b[0m", "")
+				}
 				prettyPrint(board[row][nb])
 			}
 		}
@@ -69,7 +73,7 @@ func printBoard(board [][]int) {
 	}
 }
 
-func printSteps(id string, userInput int) {
+func printSteps(id string, userInput int, endState [][]int) {
 	idIndex := 1
 	for i := len(closed) - 1; i > -1; i-- {
 		if idIndex <= len(id) {
@@ -84,12 +88,12 @@ func printSteps(id string, userInput int) {
 					lsOut, _ := lsCmd.Output()
 					fmt.Print(string(lsOut))
 				}
-				fmt.Println(xd("ID: " + closed[i].id, 1))
+				fmt.Println(xd("ID: "+closed[i].id, 1))
 				fmt.Println(xd("----------", 1))
-				printBoard(closed[i].board)
+				printBoard(closed[i].board, endState)
 				fmt.Println(xd("----------", 1))
 				if userInput == 2 {
-					fmt.Println("Steps left : ", closed[0].g - idIndex + 1)
+					fmt.Println("Steps left : ", closed[0].g-idIndex+1)
 				}
 				idIndex++
 
