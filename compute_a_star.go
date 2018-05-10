@@ -81,8 +81,8 @@ func addNeighbours(n *node, endState [][]int, size int, input int) {
 	}
 }
 
-func computeAStar(input int, board [][]int, endState [][]int, size int, showInterface bool) {
-	h := heuristicSwitch(input, board, endState)
+func computeAStar(userInput []int, board [][]int, endState [][]int, size int) {
+	h := heuristicSwitch(userInput[1], board, endState)
 	firstNode := node{
 		board: copyBoard(board, size),
 		id:    "0",
@@ -100,16 +100,16 @@ func computeAStar(input int, board [][]int, endState [][]int, size int, showInte
 			openMax = len(open)
 		}
 		if closed[0].h == 0 {
-			if showInterface == true {
-				printSteps(closed[0].id)
+			if userInput[2] != 1 {
+				printSteps(closed[0].id, userInput[2])
 				return
 			}
-			printBoard(endState)
-			fmt.Println("number of moves required : ", closed[0].g + 1)
-			fmt.Println("complexity in size : ", openMax)
-			fmt.Println("complexity in time : ", len(open) + len(closed))
+			fmt.Println(xd("solution ID : " + closed[0].id, 1))
+			fmt.Println(xd("number of moves required : ", 1), closed[0].g + 1)
+			fmt.Println(xd("complexity in size : ", 1), openMax)
+			fmt.Println(xd("complexity in time : ", 1), len(open) + len(closed))
 			return
 		}
-		addNeighbours(closed[0], endState, size, input)
+		addNeighbours(closed[0], endState, size, userInput[1])
 	}
 }

@@ -18,10 +18,10 @@ func heuristicSwitch(input int, board [][]int, endState [][]int) int {
 	return 0
 }
 
-func computeSwitch(userInput []int, board [][]int, endState [][]int, size int, showInterface bool) {
+func computeSwitch(userInput []int, board [][]int, endState [][]int, size int) {
 	switch userInput[0] {
 	case 1:
-		computeAStar(userInput[1], board, endState, size, showInterface)
+		computeAStar(userInput, board, endState, size)
 	case 2:
 		fmt.Println("[WIP] compute greedy search")
 	}

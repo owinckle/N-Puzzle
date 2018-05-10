@@ -8,14 +8,17 @@ import (
 	"os"
 )
 
+var xdlol bool = false
+
 func main() {
-	showInterface := false
 	if len(os.Args) != 2 {
 		if len(os.Args) != 3 {
-			log.Fatal(`Usage: ./puzzle <demo_file> [-i INTERFACE]`)
+			log.Fatal(`Usage: ./puzzle <demo_file> -xd`)
 		}
-		if len(os.Args) == 3 && os.Args[2] == "-i" {
-			showInterface = true
+		if len(os.Args) == 3 && os.Args[2] == "-xd" {
+			xdlol = true
+		} else if len(os.Args) == 3 && os.Args[2] != "-xd" {
+			log.Fatal(`Usage: ./puzzle <demo_file> -xd`)
 		}
 	}
 
@@ -46,6 +49,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	computeSwitch(userInput, board, endState, len(board), showInterface)
+	computeSwitch(userInput, board, endState, len(board))
 	return
 }
